@@ -1,0 +1,28 @@
+name: auction_app
+description: A new Flutter project.
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  firebase_core: "^1.5.0"
+  google_sign_in: ^5.0.7
+  firebase_auth: "^3.0.2"
+  provider: ^6.0.0
+  font_awesome_flutter: ^9.1.0
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+    - assets/logo.png
+  uses-material-design: true
