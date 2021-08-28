@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'package:auction_app/data/model/product.dart';
+
 class ProductWidget extends StatelessWidget {
-  const ProductWidget({Key? key}) : super(key: key);
+  const ProductWidget({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
+    // var products = Provider.of<List<Product>>(context, listen: false);
+    // return Center(child: Text('lenght is ${product.productName}'));
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -14,7 +22,13 @@ class ProductWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              '/product-details',
+              arguments: product,
+            );
+          },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -25,7 +39,8 @@ class ProductWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(
-                    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
+                    '${product.productImageURL}',
+                    // 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -34,18 +49,18 @@ class ProductWidget extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Sneaker',
+                    '${product.productName}',
                     style: TextStyle(fontSize: 20),
                   ),
-                  Text(
-                    'Red famous sneaker',
-                    style: TextStyle(fontSize: 12),
-                  ),
+                  // Text(
+                  //   '${product.productDescription}',
+                  //   style: TextStyle(fontSize: 12),
+                  // ),
                   SizedBox(
                     height: 20,
                   ),
                   Text(
-                    'Last Bid: \$250',
+                    '${product.minBidPrice}',
                     style: TextStyle(fontSize: 14),
                   )
                 ],

@@ -1,8 +1,5 @@
-import 'package:auction_app/core/provider/google_sign_in.dart';
-import 'package:auction_app/core/utils/resources.dart';
-import 'package:auction_app/presentation/utils/decorations.dart';
+import 'package:auction_app/presentation/screen/signup/google_sign_in.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 // import 'package:firebase_core/firebase_core.dart';
 

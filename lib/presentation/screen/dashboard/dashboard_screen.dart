@@ -1,4 +1,5 @@
-import 'package:auction_app/presentation/screen/dashboard/product_widget.dart';
+import 'package:auction_app/presentation/screen/dashboard/product_list.dart';
+import 'package:auction_app/presentation/widgets/product_widget.dart';
 import 'package:auction_app/presentation/widgets/navigation_drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +16,7 @@ class DashboardScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Container(
-          child: ListView.builder(
-            itemBuilder: (_, index) {
-              return Container(
-                child: ProductWidget(),
-              );
-            },
-            itemCount: 10,
-          ),
+          child: ProductList(),
         ),
       ),
       floatingActionButton: Container(
@@ -31,7 +25,9 @@ class DashboardScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/add-product');
+              },
               child: Icon(Icons.add),
             ),
           ],
