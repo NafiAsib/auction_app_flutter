@@ -17,7 +17,7 @@ For now, users can only Sign up with Gmail. No additional settings is needed, ju
 I tried to achieve clean architecture with a data flow like below,
 
 ```
-api -> repository -> usecase -> provider -> screen
+firebase -> api -> repository -> usecase -> provider -> screens
 ```
 
 But with firebase stream and provider I couldn't get it right. Once the
@@ -25,7 +25,7 @@ features are completed, I'll refactore with proper layering.
 
 ### Routes
 
-I used Generated Routes througout the project. It's flexible, clean and passing arguments is neat.
+I used Generated Routes throughout the project. It's flexible, clean and passing arguments is neat.
 
 ### Used plugins
 
@@ -34,3 +34,9 @@ I used Generated Routes througout the project. It's flexible, clean and passing 
 [image_picker](https://pub.dev/packages/image_picker) - Used to pick image while uploading an item for auction.
 
 [keyboard_dismisser](https://pub.dev/packages/keyboard_dismisser) - Handles gestures nicely. Used to unfocus keyboard on some selected gestures.
+
+### Build
+
+```
+$ flutter build apk --release
+```
