@@ -4,7 +4,6 @@ import 'package:auction_app/core/utils/notifier_state.dart';
 import 'package:auction_app/presentation/screen/add_product/add_product_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:provider/provider.dart';
 
@@ -59,8 +58,6 @@ class _AddProductState extends State<AddProduct> {
                   notifier.name = nameController.text;
                   notifier.desc = descController.text;
                   notifier.minBidPrice = int.parse(priceController.text);
-                  // notifier.bidStartDate =
-                  // notifier.image = img;
                   notifier.upload();
                 },
                 child: Container(
@@ -185,7 +182,6 @@ class _AddProductState extends State<AddProduct> {
                     ),
                   ),
                 );
-                ;
               }
             },
           ),

@@ -1,4 +1,4 @@
-import 'package:auction_app/core/provider/google_sign_in.dart';
+import 'package:auction_app/presentation/screen/signup/google_sign_in.dart';
 import 'package:auction_app/core/routes/route_generator.dart';
 import 'package:auction_app/data/datasource/firestore_service.dart';
 import 'package:auction_app/presentation/screen/add_product/add_product_provider.dart';

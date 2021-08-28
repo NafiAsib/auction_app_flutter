@@ -1,5 +1,4 @@
 import 'package:auction_app/presentation/screen/dashboard/dashboard_screen.dart';
-import 'package:auction_app/presentation/screen/login/login_screen.dart';
 import 'package:auction_app/presentation/screen/signup/signup_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
