@@ -46,6 +46,7 @@ class NavigationDrawerWidget extends StatelessWidget {
               icon: Icons.format_list_bulleted,
               // onClicked: () => Navigator.pushNamed(context, '/'),
               onClicked: () {
+                Navigator.pop(context);
                 Navigator.pushNamed(context, '/my-items', arguments: user);
               },
             ),
@@ -57,6 +58,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                 final provider =
                     Provider.of<GoogleSignInProvider>(context, listen: false);
                 provider.logout();
+                Navigator.pushNamed(context, '/');
               },
             ),
             Padding(

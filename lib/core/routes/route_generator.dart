@@ -9,6 +9,7 @@ import 'package:auction_app/presentation/screen/user_posted_items/my_posted_item
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
+  RouteGenerator._();
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {

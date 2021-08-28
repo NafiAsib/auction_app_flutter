@@ -23,31 +23,64 @@ class ProductDetails extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: currentWidth,
-              height: currentWidth,
-              child: Image.network(
-                '${product.productImageURL}',
-                fit: BoxFit.cover,
+            Center(
+              child: Container(
+                width: currentWidth,
+                height: currentWidth,
+                child: Image.network(
+                  '${product.productImageURL}',
+                  fit: BoxFit.cover,
+                ),
               ),
+            ),
+            SizedBox(
+              height: 16,
             ),
             Row(
               children: [
                 Text('Product Name: '),
-                Text('${product.productName}')
+                Text(
+                  '${product.productName}',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                )
               ],
+            ),
+            SizedBox(
+              height: 16,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Description: '),
-                Text('${product.productDescription}'),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  '${product.productDescription}',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
               ],
+            ),
+            SizedBox(
+              height: 20,
             ),
             Row(
               children: [
                 Text('Minimum bid price: '),
-                Text('${product.minBidPrice}'),
+                Text(
+                  '৳',
+                  style: TextStyle(fontSize: 25),
+                ),
+                Text(
+                  '${product.minBidPrice}',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
               ],
             )
           ],

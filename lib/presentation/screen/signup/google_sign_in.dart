@@ -1,8 +1,11 @@
+import 'package:auction_app/core/utils/notifier_state.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
+  NotifierState _notifierState = NotifierState.INITIAL;
+  NotifierState get notifierState => _notifierState;
   final googleSignIn = GoogleSignIn();
 
   GoogleSignInAccount? _user;
@@ -11,6 +14,7 @@ class GoogleSignInProvider extends ChangeNotifier {
 
   Future googleLogin() async {
     try {
+      _setState(NotifierState.LOADING);
       final googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
         return;
@@ -30,11 +34,18 @@ class GoogleSignInProvider extends ChangeNotifier {
       print(e.toString());
     }
 
-    notifyListeners();
+    // notifyListeners();
   }
 
   Future logout() async {
     await googleSignIn.disconnect();
     FirebaseAuth.instance.signOut();
+    _setState(NotifierState.LOADED);
+    // notifyListeners();
+  }
+
+  void _setState(NotifierState notifierState) {
+    _notifierState = notifierState;
+    notifyListeners();
   }
 }

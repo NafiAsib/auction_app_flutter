@@ -29,7 +29,7 @@ class ProductList extends StatelessWidget {
             itemCount: products.length,
           );
         } else if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           print("error is => ${snapshot.error}");
           print(snapshot.error.hashCode);
