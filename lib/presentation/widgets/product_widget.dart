@@ -60,7 +60,7 @@ class ProductWidget extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    '${product.minBidPrice}',
+                    'Bid starts at: ৳${product.minBidPrice}',
                     style: TextStyle(fontSize: 14),
                   )
                 ],

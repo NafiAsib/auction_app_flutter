@@ -28,13 +28,14 @@ class ProductDetailsProvider extends ChangeNotifier {
 
     DocumentReference db =
         FirebaseFirestore.instance.collection('bids').doc(id);
-
+    maxBidPrice = price;
+    bidder = user!.uid;
     return db
         .update({
           "price": bidPrice,
-          "bidder": user?.uid,
+          "bidder": user.uid,
         })
-        .then((res) => print("updated"))
+        .then((res) => notifyListeners())
         .catchError((e) => print(e));
 
     //print(id);
@@ -93,18 +94,28 @@ class ProductDetailsProvider extends ChangeNotifier {
         .doc(id)
         .get()
         .then((value) {
-      bidder = value.data()?['bidder'];
-      maxBidPrice = value.data()?['price'];
-      print("printing maxBidPrice");
+      print('inside api call');
+      print(value.data());
+      if (value.data()?['bidder'] != null) {
+        bidder = value.data()?['bidder'];
+        print("here bidding");
+        if (bidder == user?.uid) {
+          isUserMaxBidder = true;
+        } else {
+          isUserMaxBidder = false;
+        }
+      }
+      if (value.data()?['price'] != null) {
+        maxBidPrice = value.data()?['price'];
+        notifyListeners();
+      }
+      // print("printing maxBidPrice");
       print(maxBidPrice);
-    });
+    }).catchError((e) => print(e));
 
     // print(bid);
-    if (bidder == user?.uid) {
-      isUserMaxBidder = true;
-    } else {
-      isUserMaxBidder = false;
-    }
+
+    notifyListeners();
   }
 
   Future<void> load() async {

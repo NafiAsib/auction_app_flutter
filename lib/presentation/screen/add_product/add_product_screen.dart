@@ -177,11 +177,11 @@ class _AddProductState extends State<AddProduct> {
                             pickDate(context);
                           },
                           child: notifier.bidStartDate == null
-                              ? Text('Select auction start date')
+                              ? Text('Select auction end date')
                               : Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text('Bid starts from: '),
+                                    Text('Bid ends on: '),
                                     Text(
                                         '${notifier.bidStartDate?.day}/${notifier.bidStartDate?.month}/${notifier.bidStartDate?.year}'),
                                   ],
@@ -205,7 +205,8 @@ class _AddProductState extends State<AddProduct> {
     final newDate = await showDatePicker(
       context: context,
       initialDate: notifier.bidStartDate ?? DateTime.now(),
-      firstDate: DateTime.now().subtract(Duration(days: 7)),
+      // firstDate: DateTime.now().subtract(Duration(days: 7)),
+      firstDate: DateTime.now(),
       lastDate: DateTime.now().add(Duration(days: 7)),
     );
 
@@ -223,7 +224,7 @@ class _AddProductState extends State<AddProduct> {
 
   String? validateDesc(String value) {
     if (!(value.length > 10) && value.isNotEmpty) {
-      return "Name should be atleast 10 character long";
+      return "Description should be atleast 10 character long";
     }
     return null;
   }

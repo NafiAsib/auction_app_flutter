@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Auction',
         theme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
         home: HomeScreen(),

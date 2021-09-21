@@ -42,6 +42,8 @@ class AddProductProvider extends ChangeNotifier {
       // print("User Added");
       await bids.add({
         "productID": value.id,
+        "bidder": "",
+        "price": minBidPrice,
       }).catchError((e) {
         print("Failed to add bid reference");
       });

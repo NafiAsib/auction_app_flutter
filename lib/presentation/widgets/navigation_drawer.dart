@@ -36,11 +36,11 @@ class NavigationDrawerWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Divider(color: ColorResources.DRAWER_DIVIDER_COLOR),
             ),
-            buildMenuItem(
-              text: 'Profile',
-              icon: Icons.account_circle,
-              // onClicked: () => Navigator.pushNamed(context, '/'),
-            ),
+            // buildMenuItem(
+            //   text: 'Profile',
+            //   icon: Icons.account_circle,
+            //   // onClicked: () => Navigator.pushNamed(context, '/'),
+            // ),
             buildMenuItem(
               text: 'My posted items',
               icon: Icons.format_list_bulleted,

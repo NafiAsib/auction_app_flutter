@@ -52,6 +52,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   provider.bid(
                       int.parse(priceController.text), widget.product.id);
                   Navigator.pop(context);
+                  // initState();
                 }
               },
               child: Text('Submit'),
@@ -70,7 +71,9 @@ class _ProductDetailsState extends State<ProductDetails> {
         Provider.of<ProductDetailsProvider>(context, listen: false);
     provider.productID = widget.product.id;
     // print("initState called");
-
+    // maxBidPrice = widget.product.minBidPrice;
+    // provider.maxBidPrice = maxBidPrice;
+    print(widget.product.bidStartDate.isBefore(DateTime.now()));
     provider.getBid();
     // maxBidPrice = provider.maxBidPrice;
     // this.getData();
@@ -88,7 +91,8 @@ class _ProductDetailsState extends State<ProductDetails> {
         centerTitle: true,
         title: Text('${widget.product.productName}'),
       ),
-      floatingActionButton: widget.product.seller == firebaseUser?.uid
+      floatingActionButton: widget.product.seller == firebaseUser?.uid ||
+              widget.product.bidStartDate.isBefore(DateTime.now())
           ? Container()
           : Container(
               padding: EdgeInsets.symmetric(vertical: 20),
@@ -110,109 +114,111 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ],
               ),
             ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Container(
-                  width: currentWidth,
-                  height: currentWidth,
-                  child: Image.network(
-                    '${widget.product.productImageURL}',
-                    fit: BoxFit.cover,
+      body: Consumer<ProductDetailsProvider>(builder: (context, value, child) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Container(
+                    width: currentWidth,
+                    height: currentWidth,
+                    child: Image.network(
+                      '${widget.product.productImageURL}',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              Row(
-                children: [
-                  Text('Product Name: '),
-                  Text(
-                    '${widget.product.productName}',
-                    style: TextStyle(
-                      fontSize: 20,
+                SizedBox(
+                  height: 16,
+                ),
+                Row(
+                  children: [
+                    Text('Product Name: '),
+                    Text(
+                      '${widget.product.productName}',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Description: '),
+                    SizedBox(
+                      height: 5,
                     ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Description: '),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    '${widget.product.productDescription}',
-                    style: TextStyle(
-                      fontSize: 20,
+                    Text(
+                      '${widget.product.productDescription}',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  Text('Current bid price: '),
-                  // Text(
-                  //   '৳',
-                  //   style: TextStyle(fontSize: 25),
-                  // ),
-                  Text(
-                    provider.maxBidPrice == null
-                        ? 'No bid yet!'
-                        : '৳${provider.maxBidPrice}',
-                    style: TextStyle(
-                      fontSize: 20,
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Text('Current bid price: '),
+                    // Text(
+                    //   '৳',
+                    //   style: TextStyle(fontSize: 25),
+                    // ),
+                    Text(
+                      value.maxBidPrice == null
+                          ? 'No bid yet!'
+                          : '৳${value.maxBidPrice}',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              firebaseUser?.uid == provider.bidder
-                  ? Text("You are the highest bidder")
-                  : Container(),
-              SizedBox(
-                height: 20,
-              ),
-              widget.product.seller == firebaseUser?.uid
-                  ? Container()
-                  : Row(
-                      children: [
-                        Text('My bid price: '),
-                        Text(
-                          '',
-                          style: TextStyle(fontSize: 10),
-                        ),
-                        Text(
-                          // '${product.minBidPrice}',
-                          'You haven\'t placed a bid on this item',
-                          style: TextStyle(
-                            fontSize: 10,
-                          ),
-                        ),
-                      ],
+                    SizedBox(
+                      width: 15,
                     ),
-            ],
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                firebaseUser?.uid == value.bidder
+                    ? Text("You are the highest bidder")
+                    : Container(),
+                SizedBox(
+                  height: 20,
+                ),
+                // widget.product.seller == firebaseUser?.uid
+                //     ? Container()
+                //     : Row(
+                //         children: [
+                //           Text('My bid price: '),
+                //           Text(
+                //             '',
+                //             style: TextStyle(fontSize: 10),
+                //           ),
+                //           Text(
+                //             // '${product.minBidPrice}',
+                //             'You haven\'t placed a bid on this item',
+                //             style: TextStyle(
+                //               fontSize: 10,
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }
