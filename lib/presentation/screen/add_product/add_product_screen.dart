@@ -22,6 +22,11 @@ class _AddProductState extends State<AddProduct> {
   XFile? image;
   File? img;
 
+  void initState() {
+    super.initState();
+    // This will print "initState() ---> MainPage"
+  }
+
   @override
   Widget build(BuildContext context) {
     final notifier = Provider.of<AddProductProvider>(context, listen: false);
@@ -77,6 +82,10 @@ class _AddProductState extends State<AddProduct> {
                   children: [
                     SimpleDialogOption(
                       onPressed: () {
+                        // notifier.setInitail();
+                        // print('set initial');
+                        // setState(() {});
+                        Navigator.pop(context);
                         Navigator.pushNamed(context, '/dashboard');
                       },
                       child: Text('Go to dashboard'),

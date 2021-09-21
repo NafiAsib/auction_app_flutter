@@ -23,11 +23,13 @@ class AddProductProvider extends ChangeNotifier {
     final user = FirebaseAuth.instance.currentUser;
     _setState(NotifierState.LOADING);
     String imageName = randomAlphaNumeric(9);
-    print("imageName is: $imageName");
+    // print("imageName is: $imageName");
     await uploadImage(image, imageName);
     await downloadURLExample(imageName);
     CollectionReference products =
         FirebaseFirestore.instance.collection('product-info');
+
+    CollectionReference bids = FirebaseFirestore.instance.collection('bids');
 
     return products.add({
       "seller": user?.uid,
@@ -36,8 +38,13 @@ class AddProductProvider extends ChangeNotifier {
       "productDescription": desc,
       "minBidPrice": minBidPrice,
       "bidStartDate": bidStartDate,
-    }).then((value) {
+    }).then((value) async {
       // print("User Added");
+      await bids.add({
+        "productID": value.id,
+      }).catchError((e) {
+        print("Failed to add bid reference");
+      });
       _setState(NotifierState.LOADED);
     }).catchError((error) {
       print("Failed to add user: $error");
@@ -58,7 +65,7 @@ class AddProductProvider extends ChangeNotifier {
         _setState(NotifierState.LOADING);
       }
     }, onError: (e) {
-      print(task.snapshot);
+      // print(task.snapshot);
 
       if (e.code == 'permission-denied') {
         print('User does not have permission to upload to this reference.');
@@ -67,7 +74,7 @@ class AddProductProvider extends ChangeNotifier {
 
     try {
       await task;
-      print('Upload complete.');
+      // print('Upload complete.');
     } on FirebaseException catch (e) {
       if (e.code == 'permission-denied') {
         print('User does not have permission to upload to this reference.');
@@ -79,12 +86,17 @@ class AddProductProvider extends ChangeNotifier {
     url = await firebase_storage.FirebaseStorage.instance
         .ref('productImages/$imageName.jpg')
         .getDownloadURL();
-    print("url is: $url");
+    // print("url is: $url");
   }
 
   void _setState(NotifierState notifierState) {
     _notifierState = notifierState;
     notifyListeners();
+  }
+
+  void setInitail() {
+    _setState(NotifierState.INITIAL);
+    print(_notifierState);
   }
 
   void setimage(File? img) {

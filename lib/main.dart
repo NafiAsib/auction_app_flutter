@@ -1,3 +1,4 @@
+import 'package:auction_app/presentation/screen/product_details/product_details_provider.dart';
 import 'package:auction_app/presentation/screen/signup/google_sign_in.dart';
 import 'package:auction_app/core/routes/route_generator.dart';
 import 'package:auction_app/data/datasource/firestore_service.dart';
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<AddProductProvider>(
           create: (_) => AddProductProvider(),
+        ),
+        ChangeNotifierProvider<ProductDetailsProvider>(
+          create: (_) => ProductDetailsProvider(),
         ),
         Provider<FirestoreDatabase>(
           create: (context) => FirestoreDatabase(),

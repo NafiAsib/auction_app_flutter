@@ -1,21 +1,21 @@
 name: auction_app
 description: A new Flutter project.
 
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  firebase_core: "^1.5.0"
+  firebase_core: '^1.5.0'
   google_sign_in: ^5.0.7
-  firebase_auth: "^3.0.2"
-  cloud_firestore: "^2.5.0"
-  firebase_storage: "^10.0.2"
+  firebase_auth: '^3.0.2'
+  cloud_firestore: '^2.5.0'
+  firebase_storage: '^10.0.2'
   provider: ^6.0.0
   cupertino_icons: ^1.0.2
   keyboard_dismisser: ^2.0.0
@@ -23,13 +23,20 @@ dependencies:
   random_string: ^2.3.1
   flutter_svg: ^0.22.0
   flutter_native_splash: ^1.2.1
+  flutter_launcher_icons: '^0.9.2'
+  fluttertoast: ^8.0.8
 
 flutter_native_splash:
-  color: "#3E2C41"
-  image: "assets/logo-1.png"
+  color: '#3E2C41'
+  image: 'assets/logo-1.png'
   android: true
   ios: true
   web: true
+
+flutter_icons:
+  image_path: 'assets/logo-1.png'
+  android: true
+  ios: true
 
 dev_dependencies:
   flutter_test:
