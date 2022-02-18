@@ -2,7 +2,7 @@
 
 A simple flutter app that uses Firebase firestore as backend and Firebase Storage for storage purpose. User's can register and place their items for auction. Other users can bid on placed items.
 
-_Right now a user can't bid, this feature is in progress._
+_All feature implemented._
 
 ### Authentication
 
